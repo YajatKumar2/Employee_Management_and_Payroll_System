@@ -1,0 +1,29 @@
+What are the in the folders:
+
+model/ — domain classes: Person, Employee, PaymentRecord, AttendanceRecord, AttendanceStatus, 
+
+dao/ — EmployeeDao (in-memory list)
+
+service/ — AttendanceService, SalaryCalculator (business logic)
+
+ui/ — Swing UI: PayrollWindow (main JFrame), EmployeePanel, AttendancePanel, SalarySlipPanel)
+
+app/ — PayrollWindow  — entry point for running the ui
+
+------------------------------------------------------------------------------------------
+
+How to open in Eclipse:
+
+File → Import → Existing Projects into Workspace → select the project root folder → Finish.
+
+If Eclipse asks about module-info.java and Swing visibility, remove module-info.java.
+
+Ensure JDK is attached: Project → Properties → Java Build Path → Libraries → JRE System Library.
+
+------------------------------------------------------------------------------------------
+
+Run the application:
+
+Right‑click ui/PayrollWindow.java → Run As → Java Application.
+
+------------------------------------------------------------------------------------------

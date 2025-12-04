@@ -1,4 +1,4 @@
-/*package app;
+package app;
 
 import java.time.LocalDate;
 
@@ -48,4 +48,3 @@ public class TestApp {
         System.out.println("Net Salary: " + payment.getNet());
     }
 }
-*/
