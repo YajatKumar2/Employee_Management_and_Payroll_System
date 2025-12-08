@@ -52,7 +52,9 @@ public class PayrollWindow extends JFrame {
         EmployeePanel employeePanel = new EmployeePanel(employeeDao); // passes DAO
         SalarySlipPanel salarySlipPanel = new SalarySlipPanel(employeeDao, salaryCalculator, attendanceService);
         AttendancePanel attendancePanel = new AttendancePanel(employeeDao, attendanceService);
-        
+        //reports was not planned but tabs not enough annaru so
+        //we are doing tabs
+        ReportsPanel reportsPanel = new ReportsPanel(employeeDao, salaryCalculator);
        
         
         //tabs for employee
@@ -64,10 +66,10 @@ public class PayrollWindow extends JFrame {
         //next for attendance
         tabs.addTab("Attendance", attendancePanel);
         
-        tabs.addTab("Payroll", salarySlipPanel);
+        tabs.addTab("Payroll ", salarySlipPanel);
         
         //next only report one is left
-        
+        tabs.addTab("Report of Employee", reportsPanel);
         
         //when user switches tabs, refresh the combo box list
         tabs.addChangeListener(e -> {
@@ -85,7 +87,7 @@ public class PayrollWindow extends JFrame {
         setContentPane(tabs);
     }
 
-    // Optional: test launch from here
+    //Optional: test launch from here
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             new PayrollWindow().setVisible(true);

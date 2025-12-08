@@ -17,6 +17,9 @@ public class Employee extends Person implements Payable{
     private double allowance;
     private double taxRate;
     private double pfRate;
+    
+    //for photo new filed
+    private String photoPath;
 
     private List<PaymentRecord> paymentHistory = new ArrayList<>();
 
@@ -35,6 +38,7 @@ public class Employee extends Person implements Payable{
         this.allowance = allowance;
         this.taxRate = taxRate;
         this.pfRate = pfRate;
+    
     }
     
     //already we have payable, implement that
@@ -138,5 +142,13 @@ public class Employee extends Person implements Payable{
     
     //we will use here getter and setter
     
+	//gett and set for photo
+	/*public void setPhotoPath(String photoPath) {
+	    this.photoPath = photoPath;
+	}
+
+	public String getPhotoPath() {
+	    return photoPath;
+	}*/
 
 }

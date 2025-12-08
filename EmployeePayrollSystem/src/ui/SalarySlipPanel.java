@@ -143,6 +143,11 @@ public class SalarySlipPanel extends JPanel {
         employeeSelector.removeAllItems();
         java.util.List<Employee> list = employeeDao.getAll();
         
+        //guys this is for testing, 
+        //to seen the input
+        //remove or comment this print line
+        //or we can keep it to show that the employees are getting
+        //recorded
         System.out.println("Employees seen in SalarySlipPanel: " + list.size());
 
         for (Employee e : list) {
@@ -190,18 +195,18 @@ public class SalarySlipPanel extends JPanel {
             PaymentRecord pay = salaryCalculator.generatePayment(emp, overtimeHours, overtimeRate, lop);
 
             String slip = """
-                    ============ PAYSLIP ============
+                    ============!! PAYSLIP !!============
                     Employee: %s (%d)
                     Department: %s
                     Designation: %s
                     ---------------------------------
-                    Basic Salary   : %.2f
-                    HRA            : %.2f
-                    DA             : %.2f
-                    Allowance      : %.2f
-                    Overtime Pay   : %.2f
-                    LOP Deduction  : %.2f
-                    ---------------------------------
+                    The Basic Salary is  	: %.2f
+                    HRA            			: %.2f
+                    DA(Dearness Allowence   : %.2f
+                    Allowance      			: %.2f
+                    Overtime Pay   			: %.2f
+                    LOP Deduction  			: %.2f
+                    -------------------------------------
                     GROSS          : %.2f
                     DEDUCTIONS     : %.2f
                     NET SALARY     : %.2f

@@ -184,7 +184,7 @@ public class EmployeePanel extends JPanel {
 
         row++;
 
-        // ---------- BUTTON PANEL ----------
+        //here do the buttons now
         //we write adding, updating, deleting and reseting the grids
         JPanel buttonPanel = new JPanel();
         JButton btnAdd = new JButton("Add");
@@ -197,23 +197,23 @@ public class EmployeePanel extends JPanel {
         buttonPanel.add(btnDelete);
         buttonPanel.add(btnClear);
 
-        // store buttons in fields if you want in listeners,
+        //store buttons in fields if you want in listeners,
         // or wire listeners here directly (we'll do below).
 
-        // Add formPanel + buttonPanel at NORTH
+        //here add formPanel + buttonPanel at NORTH
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.add(formPanel, BorderLayout.CENTER);
         topPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(topPanel, BorderLayout.NORTH);
 
-        // ---------- TABLE ----------
+        //the table here
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 
         // For listeners we’ll need references to buttons:
-        // easiest: move button creation to fields.
-        // To keep code shorter here, we'll add listeners right now:
+        //easiest: move button creation to fields.
+        //to keep code shorter here, we'll add listeners right now:
         initButtonActions(btnAdd, btnUpdate, btnDelete, btnClear);
     }
     
