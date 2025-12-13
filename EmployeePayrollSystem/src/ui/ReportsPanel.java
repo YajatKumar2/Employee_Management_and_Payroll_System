@@ -169,8 +169,9 @@ public class ReportsPanel extends JPanel{
 
         for (Employee emp : employeeDao.getAll()) {
             for (PaymentRecord p : emp.getPaymentHistory()) {
-                LocalDate d = p.getDate();
-                if (d.getMonthValue() == month && d.getYear() == year) {
+                
+            	if (p.getSalaryMonth() == month &&
+                        p.getSalaryYear() == year) {
                     totalGross += p.getGross();
                     totalDed += p.getDeductions();
                     totalNet += p.getNet();

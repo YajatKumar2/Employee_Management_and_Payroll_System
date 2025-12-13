@@ -6,7 +6,7 @@ package model;
 public enum AttendanceStatus {
 	PRESENT,
 	ABSENT,
-	HALF_DAY_LEAVE, //CHANGE HERE IF WE DONT LIKE THAT
+	HALF_DAY, //
 	FULL_LEAVE
 
 }

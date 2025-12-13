@@ -192,7 +192,7 @@ public class SalarySlipPanel extends JPanel {
             
             //later we can make month selectable le
 
-            PaymentRecord pay = salaryCalculator.generatePayment(emp, overtimeHours, overtimeRate, lop);
+            PaymentRecord pay = salaryCalculator.generatePayment(emp, overtimeHours, overtimeRate, lop, month, year);
 
             String slip = """
                     ============!! PAYSLIP !!============

@@ -92,7 +92,7 @@ public class EmployeePanel extends JPanel {
         txtTaxRate = new JTextField(10);
         txtPfRate = new JTextField(10);
         comboGender = new JComboBox<>(new String[] {
-        	    "Select Gender", "Male", "Female", "Other"
+        	    "Select Gender", "Male", "Female"
         	});
 
         comboMaritalStatus = new JComboBox<>(new String[] {
@@ -430,7 +430,7 @@ public class EmployeePanel extends JPanel {
 
     private void clearForm() {
         txtId.setText("");
-        //setting here for accepting new updates 
+        //setting here for accepting new updates to the id
         txtId.setEditable(true);
         
         txtName.setText("");

@@ -1,4 +1,5 @@
-package app;
+//this one was used to test ninitially values
+/*package app;
 
 import java.time.LocalDate;
 
@@ -33,7 +34,7 @@ public class TestApp {
 
         attendanceService.markAttendance(1, LocalDate.of(2025, 11, 1), AttendanceStatus.PRESENT);
         attendanceService.markAttendance(1, LocalDate.of(2025, 11, 2), AttendanceStatus.ABSENT);
-        attendanceService.markAttendance(1, LocalDate.of(2025, 11, 3), AttendanceStatus.HALF_DAY_LEAVE);
+        attendanceService.markAttendance(1, LocalDate.of(2025, 11, 3), AttendanceStatus.HALF_DAY);
 
         double perDay = emp.getBasicSalary() / 30.0;
         double lop = attendanceService.calculateLossOfPay(1, 2025, 11, perDay);
@@ -41,10 +42,11 @@ public class TestApp {
         double overtimeHours = 10;
         double overtimeRate = 200;
 
-        var payment = payrollService.generatePayment(emp, overtimeHours, overtimeRate, lop);
+        var payment = payrollService.generatePayment(emp, overtimeHours, overtimeRate, lop, month, year);
 
         System.out.println("Gross: " + payment.getGross());
         System.out.println("Deductions: " + payment.getDeductions());
         System.out.println("Net Salary: " + payment.getNet());
     }
 }
+*/

@@ -7,13 +7,13 @@ import java.time.LocalDate;
 public class AttendanceRecord {
 	private int employeeId;
     private LocalDate date;
-    private AttendanceStatus status;
+    private AttendanceStatus attendstatus;
     
     //constructor
     public AttendanceRecord(int employeeId, LocalDate date, AttendanceStatus status) {
         this.employeeId = employeeId;
         this.date = date;
-        this.status = status;
+        this.attendstatus = status;
     }
 
 	public int getEmployeeId() {
@@ -24,8 +24,8 @@ public class AttendanceRecord {
 		return date;
 	}
 
-	public AttendanceStatus getStatus() {
-		return status;
+	public AttendanceStatus getAttendstatus() {
+		return attendstatus;
 	}
     
     //here also only we use get

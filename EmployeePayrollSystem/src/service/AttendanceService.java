@@ -34,9 +34,9 @@ public class AttendanceService {
         int halfDays = 0;
 
         for (AttendanceRecord r : list) {
-            if (r.getStatus() == AttendanceStatus.ABSENT) {
+            if (r.getAttendstatus() == AttendanceStatus.ABSENT) {
                 absents++;
-            } else if (r.getStatus() == AttendanceStatus.HALF_DAY_LEAVE) {
+            } else if (r.getAttendstatus() == AttendanceStatus.HALF_DAY) {
                 halfDays++;
             }
         }

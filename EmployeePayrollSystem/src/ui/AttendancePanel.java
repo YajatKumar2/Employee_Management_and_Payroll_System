@@ -218,13 +218,13 @@ public class AttendancePanel extends JPanel {
         for (AttendanceRecord r : records) {
             Object[] row = {
                     r.getDate().toString(),
-                    r.getStatus().name()
+                    r.getAttendstatus().name()
             };
             tableModel.addRow(row);
         }
     }
 }
 
-
-
+//we need the variables name good bcuz it will look professional and not lik
+//like a random project, plus it is easy to read
     

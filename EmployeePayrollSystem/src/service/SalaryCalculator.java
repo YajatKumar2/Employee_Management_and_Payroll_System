@@ -14,7 +14,9 @@ public class SalaryCalculator {
     public PaymentRecord generatePayment(Employee e,
                                          double overtimeHours,
                                          double overtimeRate,
-                                         double lopAmount) {
+                                         double lopAmount,
+                                         int salaryMonth,
+                                         int salaryYear) {
 
         double gross = e.getBasicSalary()
                 + e.getHra()
@@ -30,7 +32,7 @@ public class SalaryCalculator {
 
         double net = gross - totalDeductions;
 
-        PaymentRecord record = new PaymentRecord(LocalDate.now(), gross, totalDeductions, net);
+        PaymentRecord record = new PaymentRecord(gross, totalDeductions, net, salaryMonth, salaryYear);
         e.addPaymentRecord(record);
         return record;
     }

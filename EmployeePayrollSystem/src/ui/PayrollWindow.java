@@ -1,6 +1,9 @@
+//first we will do employee tab, then attendance, then salary slip, and the
+//then report things
 package ui;
 
 //importing all swing modules
+//here we imported all,
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
