@@ -7,9 +7,12 @@ package ui;
 //first importing all the packages we need
 //import all swing ones
 import javax.swing.JPanel;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ToolTipManager;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -17,10 +20,12 @@ import javax.swing.JOptionPane;
 
 //import all awt ones
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -46,6 +51,13 @@ public class EmployeePanel extends JPanel {
     private JTextField txtAllowance;
     private JTextField txtTaxRate;
     private JTextField txtPfRate;
+    //new one for id warning
+    //here i got an error while writing, i imported something
+    //from jswing suggested by eclipse
+    private JLabel labelIdWarning;
+    //now for new gender and maritial status
+    private JComboBox<String> comboGender;
+    private JComboBox<String> comboMaritalStatus;
 
     //create the table
     private JTable table;
@@ -53,6 +65,12 @@ public class EmployeePanel extends JPanel {
 
     public EmployeePanel(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
+        
+        //adding the tooltiptext things her
+        //the delay and everything
+        ToolTipManager.sharedInstance().setInitialDelay(200);
+        ToolTipManager.sharedInstance().setDismissDelay(10000);
+        ToolTipManager.sharedInstance().setReshowDelay(200);
         initComponents();
         layoutComponents();
         initListeners();
@@ -73,13 +91,38 @@ public class EmployeePanel extends JPanel {
         txtAllowance = new JTextField(10);
         txtTaxRate = new JTextField(10);
         txtPfRate = new JTextField(10);
+        comboGender = new JComboBox<>(new String[] {
+        	    "Select Gender", "Male", "Female", "Other"
+        	});
+
+        comboMaritalStatus = new JComboBox<>(new String[] {
+        	    "Select Status", "Single", "Married", "Divorced", "Widowed"
+        	});
+
         
+        //adding the warning here
+        labelIdWarning = new JLabel("Employee ID cannot be changed later");
+        labelIdWarning.setForeground(Color.DARK_GRAY);
+        labelIdWarning.setFont(new Font("Arial", Font.PLAIN, 11));
+        //i am getting import problems, like it said the awt is not there
+        //import before running, do it in eclipse so it is easy
+        
+        txtId.setToolTipText("Once an employee is added, the ID is permanent and cannot be modified.");
+        
+        //tried editing the time for txttooltip
+        //((Object) txtPfRate).setInitialDelay(0);
+     //Make tooltips stay visible for 10 seconds (10000 ms)
+       // ((Object) txtPfRate).setDismissDelay(10000);
+
+        
+        txtPfRate.setToolTipText("PF is a mandatory retirement savings scheme,\n"
+        		+ "where a portion of the salary is put in a fund that grows with interest");
         //wrtite the column names here
         //but write full names for the boxes and directly using grid
         //it is simple this way 
 
         String[] columns = {
-            "ID", "Name", "Email", "Phone", "Dept", "Desig",
+            "ID", "Name", "Email", "Phone", "Gender","Marital","Dept", "Desig",
             "Basic", "HRA", "DA", "Allow", "Tax%", "PF%"
         };
 
@@ -111,13 +154,24 @@ public class EmployeePanel extends JPanel {
         formPanel.add(new JLabel("ID:"), gbc);
         gbc.gridx = 1;
         formPanel.add(txtId, gbc);
-
+        //gbc.gridx = 1;
+        //gbc.gridy++;
+        //formPanel.add(labelIdWarning, gbc);
+        
+        
         gbc.gridx = 2;
         formPanel.add(new JLabel("Name:"), gbc);
         gbc.gridx = 3;
         formPanel.add(txtName, gbc);
 
         row++;
+        
+        gbc.gridx = 1; gbc.gridy = row;
+        gbc.gridwidth = 3;
+        formPanel.add(labelIdWarning, gbc);
+        gbc.gridwidth = 1; //reset
+        row++; //because we are doing only warning here
+        //so we do row++ to make the all other go one row down
 
         //row 1: Email, Phone
         gbc.gridx = 0; gbc.gridy = row;
@@ -131,6 +185,21 @@ public class EmployeePanel extends JPanel {
         formPanel.add(txtPhone, gbc);
 
         row++;
+      //row somethig: Gender, Marital Status
+        gbc.gridx = 0; gbc.gridy = row;
+        formPanel.add(new JLabel("Gender:"), gbc);
+
+        gbc.gridx = 1;
+        formPanel.add(comboGender, gbc);
+
+        gbc.gridx = 2;
+        formPanel.add(new JLabel("Marital Status:"), gbc);
+
+        gbc.gridx = 3;
+        formPanel.add(comboMaritalStatus, gbc);
+
+        row++;
+
 
         //row 2: Department, Designation
         gbc.gridx = 0; gbc.gridy = row;
@@ -147,7 +216,7 @@ public class EmployeePanel extends JPanel {
 
         //row 3: Basic, HRA
         gbc.gridx = 0; gbc.gridy = row;
-        formPanel.add(new JLabel("Basic:"), gbc);
+        formPanel.add(new JLabel("Basic Salary:"), gbc);
         gbc.gridx = 1;
         formPanel.add(txtBasic, gbc);
 
@@ -219,7 +288,7 @@ public class EmployeePanel extends JPanel {
     
     //now we should do the coddes for buttons
     private void initListeners() {
-        // left empty if using initButtonActions; or you can use this instead.
+        //left empty if using initButtonActions; or you can use this instead.
     }
 
     //we need action listners for closing adding updating and all
@@ -257,6 +326,8 @@ public class EmployeePanel extends JPanel {
             String phone = txtPhone.getText().trim();
             String dept = txtDepartment.getText().trim();
             String desig = txtDesignation.getText().trim();
+            String gender = comboGender.getSelectedItem().toString();
+            String maritalStatus = comboMaritalStatus.getSelectedItem().toString();
 
             double basic = Double.parseDouble(txtBasic.getText().trim());
             double hra = Double.parseDouble(txtHra.getText().trim());
@@ -270,6 +341,16 @@ public class EmployeePanel extends JPanel {
                 JOptionPane.showMessageDialog(this, "Name is required");
                 return;
             }
+            if (comboGender.getSelectedIndex() == 0 ||
+            	    comboMaritalStatus.getSelectedIndex() == 0) {
+
+            	    JOptionPane.showMessageDialog(this,
+            	        "Please select Gender and Marital Status.",
+            	        "Validation Error",
+            	        JOptionPane.ERROR_MESSAGE);
+            	    return;
+            	}
+
 
             Employee emp = new Employee(
                     id, name, email, phone,
@@ -277,6 +358,9 @@ public class EmployeePanel extends JPanel {
                     basic, hra, da, allowance,
                     taxRate, pfRate
             );
+
+            emp.setGender(comboGender.getSelectedItem().toString());
+            emp.setMaritalStatus(comboMaritalStatus.getSelectedItem().toString());
 
             employeeDao.add(emp);
             refreshTable();
@@ -297,6 +381,7 @@ public class EmployeePanel extends JPanel {
     
     //update employee for matching we will use the id or name
     private void updateEmployee() {
+    	
         try {
             int id = Integer.parseInt(txtId.getText().trim());
             Employee existing = employeeDao.findById(id);
@@ -316,6 +401,10 @@ public class EmployeePanel extends JPanel {
             existing.setAllowance(Double.parseDouble(txtAllowance.getText().trim()));
             existing.setTaxRate(Double.parseDouble(txtTaxRate.getText().trim()));
             existing.setPfRate(Double.parseDouble(txtPfRate.getText().trim()));
+            
+            existing.setGender(comboGender.getSelectedItem().toString());
+            existing.setMaritalStatus(comboMaritalStatus.getSelectedItem().toString());
+
 
             employeeDao.update(existing);
             refreshTable();
@@ -341,6 +430,9 @@ public class EmployeePanel extends JPanel {
 
     private void clearForm() {
         txtId.setText("");
+        //setting here for accepting new updates 
+        txtId.setEditable(true);
+        
         txtName.setText("");
         txtEmail.setText("");
         txtPhone.setText("");
@@ -353,6 +445,9 @@ public class EmployeePanel extends JPanel {
         txtTaxRate.setText("");
         txtPfRate.setText("");
         table.clearSelection();
+        comboGender.setSelectedIndex(0);
+        comboMaritalStatus.setSelectedIndex(0);
+
     }
     
     private void refreshTable() {
@@ -365,6 +460,8 @@ public class EmployeePanel extends JPanel {
                     emp.getName(),
                     emp.getEmail(),
                     emp.getPhone(),
+                    emp.getGender(),
+                    emp.getMaritalStatus(),
                     emp.getDepartment(),
                     emp.getDesignation(),
                     emp.getBasicSalary(),
@@ -384,6 +481,9 @@ public class EmployeePanel extends JPanel {
         if (emp == null) return;
 
         txtId.setText(String.valueOf(emp.getId()));
+        //now we are locking the option of editing is after adding the employee
+        txtId.setEditable(false);
+        
         txtName.setText(emp.getName());
         txtEmail.setText(emp.getEmail());
         txtPhone.setText(emp.getPhone());
@@ -395,6 +495,9 @@ public class EmployeePanel extends JPanel {
         txtAllowance.setText(String.valueOf(emp.getAllowance()));
         txtTaxRate.setText(String.valueOf(emp.getTaxRate()));
         txtPfRate.setText(String.valueOf(emp.getPfRate()));
+        comboGender.setSelectedItem(emp.getGender());
+        comboMaritalStatus.setSelectedItem(emp.getMaritalStatus());
+
     }
 }
 

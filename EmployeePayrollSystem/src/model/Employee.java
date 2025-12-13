@@ -6,6 +6,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JLabel;
+
 public class Employee extends Person implements Payable{
 	private int id;
 	private String department;
@@ -17,6 +19,9 @@ public class Employee extends Person implements Payable{
     private double allowance;
     private double taxRate;
     private double pfRate;
+    
+    private String gender;
+    private String maritalStatus;
     
     //for photo new filed
     private String photoPath;
@@ -138,6 +143,22 @@ public class Employee extends Person implements Payable{
 
 	public void setPaymentHistory(List<PaymentRecord> paymentHistory) {
 		this.paymentHistory = paymentHistory;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getMaritalStatus() {
+		return maritalStatus;
+	}
+
+	public void setMaritalStatus(String maritalStatus) {
+		this.maritalStatus = maritalStatus;
 	}
     
     //we will use here getter and setter
